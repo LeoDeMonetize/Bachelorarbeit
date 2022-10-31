@@ -1,0 +1,35 @@
+\begin{thebibliography}{1}
+
+\bibitem{dynamisch}
+G.~Jacobson and K.-P. Vo.
+\newblock Heaviest increasing/common subsequence problems.
+\newblock volume 644 of {\em Lecture Notes in Computer Science}, pages 52--66.
+  Springer-Verlag, 1992.
+
+\bibitem{fenwick}
+A.~Navumenka.
+\newblock Codelibrary.
+\newblock \url{https://github.com/indy256/codelibrary}.
+
+\bibitem{ohlebusch}
+E.~Ohlebusch.
+\newblock {\em Bioinformatics Algorithms: Sequence Analysis, Genome Rearrange-
+  ments, and Phylogenetic Reconstruction}.
+\newblock 2013.
+
+\bibitem{oracle}
+Oracle.
+\newblock Lesson: Generics (updated).
+\newblock
+  \url{https://docs.oracle.com/javase/tutorial/java/generics/index.html}.
+
+\bibitem{rank}
+Username: rcgldr.
+\newblock \url{https://stackoverflow.com/a/39375060}.
+
+\bibitem{schensted1961longest}
+C.~Shensted.
+\newblock Longest increasing and decreasing subsequences.
+\newblock {\em Canadian Journal of Mathematics}, 13:179--191, 1961.
+
+\end{thebibliography}

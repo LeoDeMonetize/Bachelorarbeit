@@ -1,0 +1,170 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nty/global//global/global}
+  \entry{dynamisch}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=JG}{%
+         family={Jacobson},
+         familyi={J\bibinitperiod},
+         given={G.},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=VKP}{%
+         family={Vo.},
+         familyi={V\bibinitperiod},
+         given={K.-P.},
+         giveni={K\bibinithyphendelim P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer-Verlag}%
+    }
+    \strng{namehash}{JGVKP1}
+    \strng{fullhash}{JGVKP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{J}
+    \field{sortinithash}{J}
+    \field{pages}{52\bibrangedash 66}
+    \field{series}{Lecture Notes in Computer Science}
+    \field{title}{Heaviest increasing/common subsequence problems}
+    \field{volume}{644}
+    \field{year}{1992}
+  \endentry
+
+  \entry{fenwick}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=NA}{%
+         family={Navumenka},
+         familyi={N\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{NA1}
+    \strng{fullhash}{NA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{howpublished}{\url{https://github.com/indy256/codelibrary}}
+    \field{title}{Codelibrary}
+  \endentry
+
+  \entry{ohlebusch}{book}{}
+    \name{author}{1}{}{%
+      {{hash=OE}{%
+         family={Ohlebusch},
+         familyi={O\bibinitperiod},
+         given={E.},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{OE1}
+    \strng{fullhash}{OE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{O}
+    \field{sortinithash}{O}
+    \field{title}{Bioinformatics Algorithms: Sequence Analysis, Genome
+  Rearrange- ments, and Phylogenetic Reconstruction}
+    \field{year}{2013}
+  \endentry
+
+  \entry{oracle}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=O}{%
+         family={Oracle},
+         familyi={O\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Oracle}%
+    }
+    \strng{namehash}{O1}
+    \strng{fullhash}{O1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{O}
+    \field{sortinithash}{O}
+  \field{howpublished}{\url{https://docs.oracle.com/javase/tutorial/java/generics/index.html}}
+    \field{title}{Lesson: Generics (Updated)}
+    \field{journaltitle}{docs.oracle.com}
+  \endentry
+
+  \entry{schensted1961longest}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SC}{%
+         family={Shensted},
+         familyi={S\bibinitperiod},
+         given={C.},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Cambridge University Press}%
+    }
+    \strng{namehash}{SC1}
+    \strng{fullhash}{SC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{pages}{179\bibrangedash 191}
+    \field{title}{Longest increasing and decreasing subsequences}
+    \field{volume}{13}
+    \field{journaltitle}{Canadian Journal of Mathematics}
+    \field{year}{1961}
+  \endentry
+
+  \entry{wordpress}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=e}{%
+         family={e2718281828459045},
+         familyi={e\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{e1}
+    \strng{fullhash}{e1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+  \field{howpublished}{\url{https://e2718281828459045.wordpress.com/2013/09/06/maximum-sum-increasing-subsequence/}}
+    \field{title}{Maximum sum increasing subsequene}
+  \endentry
+
+  \entry{rank}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=rU}{%
+         family={rcgldr},
+         familyi={r\bibinitperiod},
+         given={Username:},
+         giveni={U\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{rU1}
+    \strng{fullhash}{rU1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{howpublished}{\url{https://stackoverflow.com/a/39375060}}
+  \endentry
+\enddatalist
+\endinput

@@ -1,0 +1,10 @@
+\section{Einführung}
+
+Bei einer gegebenen Folge an Buchstaben eines geordneten Alphabets, auf welcher ein Gewicht definiert ist, ist eine \textit{Heaviest
+Increasing Subsequence}(HIS) (größte, streng monotone Teilfolge) die Teilfolge, welche streng monoton ist und zudem die Summe der Gewichte der Teilfolgenglieder am Größten allen möglicher streng monotonen Teilfolgen ist. Dabei spielt die Eindeutigkeit solch einer Folge keine Rolle.\\
+Eine einfachere Umschreibung wäre wie folgt:
+\begin{quote}
+    \small Man hat eine endliche Liste an Zahlen, die man von links nach rechts durchläuft. Dabei werden Zahlen so herausgenommen, dass jede weitere gezogene Zahl größer als die vorherige sein muss. Mit welcher Zahl man beginnt, ist nicht vorgegeben. Am Ende eines Durchganges wird die Summe aller gezogenen Zahlen ermittelt. Die Frage ist nun: Welche Karten müssen gezogen werden, sodass die Summe am Ende am größten ist?
+    \end{quote}
+Erste Überlegungen zum Lösen dieses Problems haben sich aus dem verwandten Problem der \textit{Longest Increasing Subsequence}(LIS) (längste, streng monotone Teilfolge) ergeben. Dabei handelt es sich um einen DP Algorithmus, d.h. es wird eine Tabelle mit einer festen, aber abhängigen Größe initialisiert und dann Eintrag für Eintrag nacheinander gefüllt. Dabei dürfen nur Werte aus der gegebenen Folge oder schon eingetragene Tabellenwerte für die Berechnung genutzt werden. Weiterführende Anwendungen der HIS und LIS sind in der Algebra, v.a. in den Permutationsgruppen, zu finden\cite{schensted1961longest}.\\
+Der zweite Algorithmus kommt aus der Bioinformatik. Kern des Algorithmus' ist der Vergleich zweier bekannter Genome, in denen $"$ähnliche$"$ Abschnitte bekannt sind und gegenübergestellt werden, so dass keine Überlappung entsteht.

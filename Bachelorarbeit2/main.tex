@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+\newtheorem{definition}{Definition}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    language=Java,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+\title{Vergleich und Implementierung zweier Algorithmen zum Berechnen der Heaviest Increasing Sequence}
+\author{Leonardowitsch Auterhoff }
+\date{August 2022}
+
+\begin{document}
+\newcommand{\an}{$a_1a_2a_3$\dots$a_n$}
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\begin{abstract}
+    In dieser Arbeit werden zwei Algorithmen zum Lösen des HIS-
+    Problems vorgestellt, verglichen und implementiert. Ein dynamisch programmierter und einer aus dem Bereich der Bioinformatik. Es hat sich im Verlauf der Arbeit rausgestellt, dass beide Algorithmen in der Funktionsweise identisch sind. Es handelt sich bei dem aus der Bioinformatik um eine allgemeinere Problembeschreibung von dem ein Spezialfall das HIS-Problem löst und dessen Konkretisierung auf den dynamisch programmierten zurückführt. Deshalb ist die Implementierung nur für den dynamisch Programmierten angegeben mit einer einfach verketten Liste und einem Fenwick Tree. Es stellt sich raus, dass ein Fenwick Tree in der Laufzeit vorteilhafter gegenüber einer Liste ist, um das HIS-Problem zu lösen.
+\end{abstract}
+
+
+\input{Einfuehrung.tex}
+
+\input{Notation.tex}
+
+\input{DynamischerALgorithmus.tex}
+
+\input{2terAlgorithmus.tex}
+
+\input{Implementierung.tex}
+
+\input{Laufzeit.tex}
+
+
+
+\section{Schlussfolgerungen}
+\input{Schlussfolgerung.tex}
+\input{Anhang.tex}
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{refs}
+\end{document}

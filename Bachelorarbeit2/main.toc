@@ -1,0 +1,28 @@
+\babel@toc {ngerman}{}
+\contentsline {section}{\numberline {1}Einführung}{3}{section.1}%
+\contentsline {section}{\numberline {2}Notation und Begrifflichkeiten}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Notation}{4}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}(Teil-)Folgen}{4}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Gewichtungen}{4}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}'Rechteck'}{4}{subsubsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.2}Begriffe und Datenstrukturen}{4}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Leeres Objekt 'ø'}{5}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}(geordnete) Liste}{5}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Fenwick Tree (Binary Indexed Tree)}{5}{subsubsection.2.2.3}%
+\contentsline {section}{\numberline {3}Dynamisch programmierter Algorithmus \cite {dynamisch}}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Herleitung}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Algorithmus}{9}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Korrektheit}{11}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Laufzeitanalyse}{12}{subsection.3.4}%
+\contentsline {section}{\numberline {4}HIS als Sonderfall des Genomvergleichs \cite {ohlebusch}}{14}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Herleitung}{14}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}erste Formulierung eines Algorithmus'}{14}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Anwendung auf den HIS}{15}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Vergleich}{17}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Implementierung und Beurteilung}{17}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Datenstrukturen}{18}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}sortierte Liste (sorted linked list)}{18}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Fenwick Tree (FT) \cite {fenwick}}{22}{subsubsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.2}Programmierung}{24}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Laufzeitenvergleich}{25}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Schlussfolgerungen}{25}{section.6}%

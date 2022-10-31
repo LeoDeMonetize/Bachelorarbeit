@@ -1,0 +1,271 @@
+\section{Implementierung und Beurteilung}
+Die Implementierung findet vollständig in Java statt. Generelle Java Syntax wird nicht erklärt, Besonderheiten wie Interfaces und der '?' Ausdruck werden an der Entsprechenden Stelle erklärt. In Java ist der ø Parameter gleich dem $null$-Verweis. Die Benutzung von Generics kann  \href{https://docs.oracle.com/javase/tutorial/java/generics/index.html}{in\cite{oracle}} nachgelesen werden. Die Liste wird referenzbasiert implementiert, um Aufrückoperationen in einem Array zu vermeiden. 
+\subsection{Datenstrukturen}
+\subsubsection{sortierte Liste (sorted linked list)}
+\normalsize
+Wie im Kapitel 3 besprochen, benötigen wir eine Datenstruktur, welche Elemente mit einer Ordnung abspeichern kann. Dafür gibt es in den meisten Programmiersprachen ein $Array$, eine Datenstruktur mit fester Länge und konstanter Zugriffszeit. Auf dieser kann man eine Ordnung definieren. Problem bei  einem Array ist, dass nicht alle Plätze benötigt werden zu jeder Zeit, und, dass das Einfügen zwischen zwei Elementen einen höheren Aufwand hat (WC ist $O(n)$). Der Grund dafür ist das Aufschieben aller nachfolgenden Elemente nach dem eingefügten Element. Damit ergibt sich auch für das Array für den Algorithmus eine Laufzeit von $O(n^2)$\\
+Beide Probleme werden bei einer (einfach) verketten Liste gelöst. Anstatt eine feste Größe festzulegen, definiert man ein Startelement (zusätzlich eine Methode die das Startelement verändern kann) und gibt bei jedem Element an, welches als nächstes kommen soll. Das letzte Element verweist dann auf ø.\\
+
+%Illustration dazu einfügen
+
+Jedoch ist die Zugriffszeit hierbei ein Problem, da man Element für Element durchgehen muss, bis das gewünschte Element gefunden ist (WC $O(n)$). Um der Idee einer Liste aus Kapitel 2 näher zu kommen, wird auf eine Implementierung mit Array verzichtet.
+
+\subsubsection*{Tupel}
+Ein Tupel ist ein simples Objekt welches zwei vergleichbare Variablen beinhaltet. Die $compareTo$ Methode gibt den Vergleich der ersten Koordinate von zwei Tupeln zurück, falls diese aber die gleiche Gewichtung haben, wird der Vergleich der zweiten Koordinate zurückgegeben. Das ist eine sehr allgemeine Formulierung ($\sim$Generics), aber konkret betrachten wir Paare an natürlichen Zahlen, bei denen $(a,b)<(x,y)$ bedeutet, dass $a<b \vee (a\geq b \wedge x<y)$ gilt. \newpage
+
+\begin{lstlisting}[mathescape]
+class Tuple<T extends Comparable<T>> implements DualArgument<Tuple<T>>{
+    T first;
+    T second;
+
+    public Tuple(T first, T second){
+        this.first=first;
+        this.second=second;
+    }
+
+    @Override
+    public int compareTo(Tuple<T> o) {
+        if(first.compareTo(o.first)!=0)
+            return first.compareTo(o.first);
+        else
+            return second.compareTo(o.second);
+    }
+}
+ \end{lstlisting}
+ 
+\textbf{Bemerkung}: Zeile 1: DualArgument ist ein kleines Interface, welches den Datentypen T dazu zwingt eine Methode zu haben, die nur das zweite Element in zwei Tupeln vergleicht. Comparable wird hier für T festgelegt, da $first$ und $second$ jeweils nur einen Wert darstellen.
+
+\subsubsection*{Element}
+Ein Element ist ein Objekt, welches ein Tupel von zwei natürlichen Zahlen beinhaltet. Außerdem gibt es eine Variable welche auf das nächste Element verweist. Als Methoden gibt es eine zum Setzen des Folgelementes und eine die ein Tupel in einem anderen Element in der zweiten Koordinate vergleicht.\newpage
+
+\begin{lstlisting}[mathescape]
+class Element<T extends DualArgument<T>> implements DualArgument<Element<T>> {
+    T content;
+    Element<T> next;
+
+    public Element(T content){
+        this.content=content;
+        next=null;
+    }
+
+    public void setNext(T next){
+        this.next=new Element<T>(next);
+    }
+
+    @Override
+    public int compareTo(Element<T> o) {
+        return content.compareTo(o.content);
+    }
+
+    @Override
+    public int compareToSecond(Element<T> o) {
+        return content.compareToSecond(o.content);
+    }
+}
+\end{lstlisting}
+
+
+
+
+%Erklärung einfügen
+
+ 
+
+\subsubsection*{Liste}
+Die Liste ist ein etwas größerer Block, weswegen nach und nach die Methoden angegeben werden. Eine Liste speichert Zugriffe auf Head und Tail (Tail braucht man ggf. nicht speichern). Eine vollständige Implementierung ist im Anhang beigelegt.
+
+\begin{lstlisting}[mathescape]
+public class LinkedList<T extends DualArgument<T>> {
+    Element<T> head; //First Element 
+    Element<T> tail; //Last Element
+    
+}
+\end{lstlisting}
+Beim Einfügen eines neuen Elementes $q$ werden zwei Elemente $s,v$ gefunden mit $s\leq q \leq v$. $s$ kriegt als Nachfolger $q$ und $q$ als Nachfolger $v$. Hier gibt es ein paar Sonderfälle. Bei einer leeren Liste wird Head und Tail auf das Neue gesetzt. Wenn das neue Element der neue Head wird, dann gibt es kein vorheriges Element, aber der Head muss neu gesetzt werden. Für Tail gilt das gleiche, bloß dass es keinen Nachfolger für das Neue gibt. Falls es nur ein Element in der Liste gibt, wird geprüft, ob das Neue davor oder danach kommt.\\
+Die Stelle, an der es eingefügt werden muss, wird durch den Vergleich zweier aufeinanderfolgenden Elementen in der Liste gefunden. Wenn das neue Element zwischen den Beiden gehört, ist die Stelle gefunden. Hierdurch ergeben sich mehere Vergleiche auf den ø (null) Parameter.
+
+\begin{lstlisting}[mathescape]
+public void insert(T toInsert) {
+        Element<T> newElement = new Element<T>(toInsert);
+        if (head == null) {  //no element in the list
+            head = newElement;
+            tail = head;
+        } else if (head.equals(tail)) {
+            if (head.compareTo(newElement) < 0) {
+                head.next = newElement;
+                tail = newElement;
+            } else {
+                newElement.next = head;
+                head = newElement;
+            }
+        } else if (head.compareTo(newElement) > 0) {
+            newElement.next = head;
+            head = newElement;
+        } else {
+            //Now we have at least two Elements in the list
+            Element<T> current = head;
+            
+            /*We check whether the newElement should go in between 
+            the current and its successor
+            current.next!=null assures we can compare it to the 
+            next Element, if not we now are at the tail*/
+            
+            while (current.next != null &&
+                current.next.compareTo(newElement) < 0) {
+                if (current.next.compareTo(newElement) == 0)
+                    break;
+                current = current.next;
+            }
+            if (current.equals(tail)) {
+                tail = newElement;
+            }
+        newElement.next = current.next;
+        current.next = newElement;
+
+    }
+}
+\end{lstlisting}
+
+Die letzte Funktionalität von Bedeutung ist die $prev$ Methode aus kapitel 2. $next$ wird nicht benötigt, denn dies ist der nachfolger von $prev$, oder falls dieser nicht Existiert, der Head der Liste. Dabei geht die Methode sehr ähnlich wie das Einfügen vor und findet die Stelle zwischen der die neue Zahl in die Liste reingehört und gibt das kleinere Element zurück. Ähnliche Sonderfälle wie beim Einfügen werden auch behandelt.
+
+
+\begin{lstlisting}[mathescape]
+public Element<T> prev(Element<T> compareTo) {
+        Element<T> current = head;
+        if (current == null)
+            return null;
+            
+        if (current.compareTo(compareTo) > 0)
+            return null;
+            
+        if (current.equals(tail)) {
+            return current.compareTo(compareTo) < 0 ?
+                current : null;
+        }
+        
+        //Now we have at least two Element in the list
+        Element<T> next = current.next;
+        while (next != null &&
+        next.compareTo(compareTo) < 0) {
+            current = next;
+            next = next.next;
+        }
+        return current;
+    }
+\end{lstlisting}
+\begin{small}
+    \footnotesize Zeile 8: der '?' Ausdruck prüft die Anweisung davor auf $true$ oder $false$ und gibt bei $true$ das vor dem : zurück, bei $false$ das danach.\\ Zusätzlich ist eine Implementierung unter Benutzung der Java Standard-Bibliothek (v.a. der ArrayList) im Anhang beigelegt. Diese hat sich im Vergleich zu meiner Objekt-basierten als gleichgültig rausgestellt. Unterschiede in der Laufzeit waren weniger als $5\%$ bei mehr als 1000 Durchläufen mit zufälliger Eingabe. Dabei ist der Unterschied wsl. auf die Inkonsistenz der Zeitmessung in Java zurückzuführen, da sowohl meine Implementierung als auch die Standard schneller war für verschiedene Eingaben.
+\end{small}
+
+\subsubsection*{newNodes}
+newNodes ist einer Liste ähnlich , welche nicht auf eine Ordnung überprüfen muss, da die Reihenfolge hier eine Rolle spielt. Eine kleine Methode zur Rekonstruktion ist beigefügt. Die Berechnung der HIS kann genauso gemacht werden in dem man als Zahlen und nicht als String arbeitet.
+
+\begin{lstlisting}[mathescape]
+class newNode{
+    int current;
+    newNode next;
+
+    public newNode(int current, newNode next){
+        this.current=current;
+        this.next=next;
+    }
+
+    public String evalString(){
+        String output=current+" ";
+        if(next==null) return output;
+        else
+            return next.evalString() + output;
+    }
+}
+\end{lstlisting}
+
+\subsubsection{Fenwick Tree (FT) \cite{fenwick}}
+Ein FT ist für eine Liste an Eingaben $a_i \dots a_n$ als ein Array implementiert, ähnlich wie man Priority Queues als Array darstellen kann. Die beiden Operationen $insert$ und $max$ sind direkt übertragbar in Java. Da es keine Methode für das Bestimmen vom LSB(i) gibt, ist dies mit den binären Operatoren $|=$ und $\&=$ implementiert. Auch muss man es leicht anpassen, da Arrays in Java beim Index 0 beginnen, und nicht bei $1$. Man kann um das zu umgehen, ein Array der Größe $n+1$ erstellen.
+\subsubsection*{$insert(D,i,v)$}
+\begin{lstlisting}
+public static void set(int[] t, int i, int value) {
+        for (; i < t.length; i |= i + 1)
+            t[i] = Math.max(t[i], value);
+}
+\end{lstlisting}
+
+\subsubsection*{$max(a_1,\dots,a_i)$}
+\begin{lstlisting}
+public static int max(int[] t, int i) {
+        int res = Integer.MIN_VALUE;
+        for (; i >= 0; i = (i & (i + 1)) - 1)
+            res = Math.max(res, t[i]);
+        return res;
+}
+\end{lstlisting}
+
+\newpage
+
+
+\subsection{Programmierung}
+Für den dynamischen Algorithmus  kann die Implementierung sehr nah an dem Pseudo-Code stattfinden. Hierbei ist node der Rückgabewert der Methode für die Rekonstruktion der HIS und die Eingabe ist ein Array an Integers
+\begin{lstlisting}[mathescape,language=Java]
+public static newNode HIS(int[] a) throws Exception {
+    //step 1
+    newNode[] nodes=new newNode[Arrays.stream(a).max().getAsInt()+1];
+    LinkedList<Tuple<Integer>> L =
+        new LinkedList<Tuple<Integer>>();
+    //step 2
+    for(int i = 0; i < a.length;i++){
+        //step 3
+        Element<Tuple<Integer>> compareTo = 
+            new Element<>(new Tuple<Integer>(a[i], 0));
+        Element<Tuple<Integer>> prev = L.prev(compareTo);
+        Tuple<Integer> sv = prev!=null ? 
+            prev.content : new Tuple<Integer>(0,0);
+        Element<Tuple<Integer>> next= 
+        (sv.equals(new Tuple<>(0,0))) ?
+            null : prev.next;
+        //step 4
+        if(L.head!=null&&L.head.compareTo(compareTo)>=0)
+            next=L.head;
+        while(next != null){
+            Tuple<Integer> tw = next.content;
+            if(sv.second+a[i]<tw.second){
+                break;
+            }
+            L.delete(next);
+            next=next.next;
+        }
+        //step 5
+        L.insert(new Tuple<Integer>(a[i],sv.second+a[i]));
+        nodes[a[i]] = new newNode(a[i],nodes[sv.first]);
+    }
+    newNode node = nodes[L.getTail().content.first];
+    return node;
+}
+\end{lstlisting}
+
+Der zweite Algorithmus im FT funktioniert etwas abgewandelt nach dem gleichem Prinzip. Für $a_1\dots a_n$ bezeichnet $rank(a_i)$ den Rang des Elementes in der Liste, d.h. welche Position $a_i$ in der List nach einem Sortiervorgang hat. Nach diesem Rang werden die Elemente in dem FT eingefügt mit der Max-Operation. Hat ein Element $a_i$ Rang $r$ wird es an der Stelle $r$ eingefügt nach der Operation. Wenn ein Wert noch nicht belegt ist, wird es mit 0 initialisiert. Falls man auch negative Werte für $a_i$ zulässt, muss es mit dem kleinst möglichem Wert initialisiert werden. \\
+Die Werte werden der Position nach eingefügt, aber der Index ist der Rang in $a$, d.h. Einträge mit Index $j<i$ im FT für die Elemente $x,y$ mit $rank(x)=j,rank(y)=i$ ist 0, g.d.w. $index(x)>index(y)$, d.h. das kleinere Element kommt nach dem größeren Element in der Liste $a$. Damit ist gewährleistet, dass das Maximum von den bisherigen Elementen $a_j$ gefunden wird mit $index(a_j)<index(a_i)$. Ein Algorithmus zum finden des Ranges eines Elementes ist in\cite{rank}  für Java zu finden. Das Prinzip vom ersten Algorithmus angewandt, bedeutet, dass Schritt 4 und die Bedingung in Schritt 5 komplett entfallen. Warum das so ist, kann in\cite{wordpress} nachgelesen werden.
+\begin{lstlisting}
+static int HIS(int[] test){
+       int[] rank = findRank(test);
+       int[] maxbit = new int[test.length];
+       int[] nodes = new int[test.length];
+       for(int i =0; i< test.length;i++){
+           int r = rank[i];
+           int s = max(maxbit,r);
+           set(maxbit,r,test[i]+s);
+           nodes[i]=test[i]+s;
+       }
+       /*int max =max(maxbit,test.length-1);
+        for(int i = test.length-1; i >=0;i--){
+            if(nodes[i]==max){
+                System.out.println(test[i]);
+                max-=test[i];
+            }
+        }*/
+       return max(maxbit,test.length-1);
+}
+\end{lstlisting}
+Der kommentierte Bereich dient der Rekonstruktion der HIS mit dem Array $nodes$, welches an der Stelle $i$, den Wert der $heaviest$ $subsequence$ von $a_1 \dots a_i$ hat die auf $a_i$ endet. 
+
+
+
+\subsection{Laufzeitenvergleich}

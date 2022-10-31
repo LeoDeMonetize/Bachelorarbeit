@@ -1,0 +1,172 @@
+\NeedsTeXFormat{LaTeX2e}
+\documentclass[a4paper,12pt,headsepline,oneside]{scrbook}
+\pagestyle{headings}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage[ngerman]{babel}
+\usepackage[backend=bibtex8]{biblatex}
+\usepackage{hyperref}
+\usepackage{setspace}         % Paket für div. Abstände, z.B. ZA
+\newenvironment{abstract}{}{}
+\usepackage{abstract}
+\bibliography{refs}
+\setlength{\parindent}{0pt}   % kein linker Einzug der ersten Absatzzeile
+\setlength{\parskip}{1.4ex plus 0.35ex minus 0.3ex} % Absatzabstand, leicht variabel
+
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+\newtheorem{definition}{Definition}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\newcommand{\an}{$a_1a_2a_3$\dots$a_n$}
+\lstdefinestyle{mystyle}{
+	language=Java,
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  HIER DATEN FUERS DECKBLATT EINTRAGEN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\fullname}{Leonardowitsch Auterhoff}
+\newcommand{\email}{leonardowitsch.auterhoff@uni-ulm.de}
+\newcommand{\titel}{Vergleich und Implementierung zweier Algorithmen zum Berechnen der Heaviest\\ Increasing Sequence}
+\newcommand{\jahr}{2022}
+\newcommand{\matnr}{1014556}
+\newcommand{\gutachterA}{Prof. Enno Ohlebusch}
+\newcommand{\gutachterB}{Prof.\,Dr.\,Name 2}
+\newcommand{\betreuer}{\gutachterA}
+\newcommand{\fakultaet}{Fakultät für Ingenieurwissenschaften, Informatik und Psychologie}
+\newcommand{\institut}{Institut für Theoretische Informatik}
+\newcommand{\arbeit}{Bachlorarbeit}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Informationen, die LaTeX in die PDF-Datei schreibt
+\pdfinfo{
+  /Author (\fullname)
+  /Title (\titel)
+  /Producer     (pdfeTex 3.14159-1.30.6-2.2)
+  /Keywords ()
+}
+\hypersetup{
+ pdftitle=\titel,
+ pdfauthor=\fullname,
+ pdfsubject={Master Thesis},
+ pdfproducer={pdfeTex 3.14159-1.30.6-2.2},
+ colorlinks=false,
+ pdfborder=0 0 0	% keine Box um die Links!
+}
+
+% Trennungsregeln
+\hyphenation{Sil-ben-trenn-ung}
+
+\begin{document}
+\frontmatter
+
+% Titelseite
+\thispagestyle{empty}
+\begin{flushright}	
+	\includegraphics[width=7cm]{logo_uulm_sw.png}\vspace{3pt}\\ 
+	\parbox[t]{7cm}{\footnotesize\bfseries
+		\fakultaet\\
+		\mdseries \institut}
+\end{flushright}
+{
+	\vspace{5cm} 
+	{\bfseries \LARGE \titel}\\
+	\footnotesize
+	{\arbeit{} an der Universität Ulm}\\[3em]	
+	{\bfseries Vorgelegt von:}\\
+	{\fullname\\ \email\\ \matnr}\\[2em]
+	{\bfseries Gutachter:}\\                     
+	{\gutachterA\\}\\[2em]
+	{\bfseries Betreuer:}\\ 
+	\betreuer\\
+	\vfill \jahr
+}
+
+
+% Impressum
+\clearpage
+\thispagestyle{empty}
+{ \small
+  \flushleft
+  Fassung \today \\\vfill
+  \copyright~\jahr~\fullname\\[0.5em]
+% Wenn Sie Ihre Arbeit unter einer freien Lizenz bereitstellen möchten, können Sie die nächste Zeile in Ihren Code aufnehmen. Bitte beachten Sie, dass Sie hierfür an allen Inhalten, inklusive enthaltener Abbildungen, die notwendigen Rechte benötigen! Beim Veröffentlichungsexemplar Ihrer Dissertation achten Sie bitte darauf, dass der Lizenztext nicht den Angaben in den Metadaten der genutzten Publikationsplattform widerspricht. Nähere Information zu den Creative Commons Lizenzen erhalten Sie hier: https://creativecommons.org/licenses/
+This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/} or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA. \\
+  Satz: PDF-\LaTeXe
+}
+\setstretch{1.1}
+
+\tableofcontents
+
+
+\begin{abstract}
+   In dieser Arbeit werden zwei Algorithmen zum Lösen des Heaviest Increasing Subsequnce Problems vorgestellt, verglichen und implementiert. Einen dynamisch programmierten (DP) Algorithmus und einer aus dem Bereich der Bioinformatik. Es hat sich im Verlauf der Arbeit herausgestellt, dass beide Algorithmen in der Funktionsweise identisch sind, bis auf einen sehr kleinen Unterschied. Es handelt sich bei dem aus der Bioinformatik um eine allgemeinere Problembeschreibung von dem ein Spezialfall das HIS-Problem löst und dessen Konkretisierung auf den dynamisch programmierten zurückführt. Deshalb ist die Implementierung nur für den dynamisch Programmierten angegeben mit einer einfach verketten Liste und einem Fenwick Tree. Es stellt sich raus, dass ein Fenwick Tree in der Laufzeit vorteilhafter gegenüber einer Liste ist, um das Heaviest Increasing Subsequence Problem zu lösen.
+\end{abstract}
+
+\input{Einfuehrung.tex}
+
+\input{Notation.tex}
+
+\input{DynamischerALgorithmus.tex}
+
+\input{2terAlgorithmus.tex}
+
+\input{Implementierung.tex}
+
+\input{Laufzeit.tex}
+
+
+
+\section{Schlussfolgerungen}
+\input{Schlussfolgerung.tex}
+\input{Anhang.tex}
+\printbibliography
+\newpage
+
+
+\clearpage
+\thispagestyle{empty}
+
+Name: \fullname \hfill Matrikelnummer: \matnr \vspace{2cm}
+
+\minisec{Erklärung}
+
+Ich erkläre, dass ich die Arbeit selbständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel verwendet habe.\vspace{2cm}
+
+Ulm, den \dotfill
+
+\hspace{10cm} {\footnotesize \fullname}
+\end{document}
